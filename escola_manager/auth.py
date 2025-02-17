@@ -1,8 +1,8 @@
-# app/auth.py
+# escola_manager/auth.py
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
-from app.models import User
-from app.forms import LoginForm
+from escola_manager.models import User  # ✅ Corrigido
+from escola_manager.forms import LoginForm  # ✅ Corrigido
 
 auth = Blueprint('auth', __name__)
 

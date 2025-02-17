@@ -1,26 +1,23 @@
-from flask import render_template, redirect, url_for, flash, request, abort
+# escola_manager/routes.py
+from flask import Blueprint, render_template, redirect, url_for, flash, abort
 from flask_login import login_required, current_user
-from app import app, db
-from app.models import School, Class, Teacher, Student, User
-from app.forms import (
-    SchoolForm,
-    ClassForm,
-    TeacherForm,
-    StudentForm,
-    LoginForm
-)
+from escola_manager import db
+from escola_manager.models import School, Class, Teacher, Student, User
+from escola_manager.forms import SchoolForm, ClassForm, TeacherForm, StudentForm
+
+admin = Blueprint('admin', __name__)
 
 # ======================= Rotas Gerais =======================
 
 
-@app.route('/')
+@admin.route('/')
 def home():
     return redirect(url_for('auth.login'))
 
 # ======================= Rotas de Admin =======================
 
 
-@app.route('/admin/dashboard')
+@admin.route('/admin/dashboard')
 @login_required
 def admin_dashboard():
     if current_user.role != 'admin':
@@ -38,7 +35,7 @@ def admin_dashboard():
 # ----------------------- Escolas -----------------------
 
 
-@app.route('/admin/schools')
+@admin.route('/admin/schools')
 @login_required
 def list_schools():
     if current_user.role != 'admin':
@@ -48,7 +45,7 @@ def list_schools():
     return render_template('admin/schools.html', schools=schools)
 
 
-@app.route('/admin/school/new', methods=['GET', 'POST'])
+@admin.route('/admin/school/new', methods=['GET', 'POST'])
 @login_required
 def new_school():
     form = SchoolForm()
@@ -67,7 +64,7 @@ def new_school():
     return render_template('admin/new_school.html', form=form)
 
 
-@app.route('/admin/school/<int:id>/edit', methods=['GET', 'POST'])
+@admin.route('/admin/school/<int:id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_school(id):
     school = School.query.get_or_404(id)
@@ -82,7 +79,7 @@ def edit_school(id):
     return render_template('admin/edit_school.html', form=form, school=school)
 
 
-@app.route('/admin/school/<int:id>/delete', methods=['POST'])
+@admin.route('/admin/school/<int:id>/delete', methods=['POST'])
 @login_required
 def delete_school(id):
     school = School.query.get_or_404(id)
@@ -94,14 +91,14 @@ def delete_school(id):
 # ----------------------- Turmas -----------------------
 
 
-@app.route('/admin/classes')
+@admin.route('/admin/classes')
 @login_required
 def list_classes():
     classes = Class.query.all()
     return render_template('admin/classes.html', classes=classes)
 
 
-@app.route('/admin/class/new', methods=['GET', 'POST'])
+@admin.route('/admin/class/new', methods=['GET', 'POST'])
 @login_required
 def new_class():
     form = ClassForm()
@@ -123,14 +120,14 @@ def new_class():
 # ----------------------- Professores -----------------------
 
 
-@app.route('/admin/teachers')
+@admin.route('/admin/teachers')
 @login_required
 def list_teachers():
     teachers = Teacher.query.all()
     return render_template('admin/teachers.html', teachers=teachers)
 
 
-@app.route('/admin/teacher/new', methods=['GET', 'POST'])
+@admin.route('/admin/teacher/new', methods=['GET', 'POST'])
 @login_required
 def new_teacher():
     form = TeacherForm()
@@ -164,14 +161,14 @@ def new_teacher():
 # ----------------------- Alunos -----------------------
 
 
-@app.route('/admin/students')
+@admin.route('/admin/students')
 @login_required
 def list_students():
     students = Student.query.all()
     return render_template('admin/students.html', students=students)
 
 
-@app.route('/admin/student/new', methods=['GET', 'POST'])
+@admin.route('/admin/student/new', methods=['GET', 'POST'])
 @login_required
 def new_student():
     form = StudentForm()
@@ -216,7 +213,7 @@ def new_student():
 # ======================= Rotas de Professor =======================
 
 
-@app.route('/teacher/dashboard')
+@admin.route('/teacher/dashboard')
 @login_required
 def teacher_dashboard():
     if current_user.role != 'teacher':
@@ -232,7 +229,7 @@ def teacher_dashboard():
 # ======================= Rotas de Aluno =======================
 
 
-@app.route('/student/dashboard')
+@admin.route('/student/dashboard')
 @login_required
 def student_dashboard():
     if current_user.role != 'student':

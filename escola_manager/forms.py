@@ -4,7 +4,7 @@ from wtforms import (
     PasswordField,
     DateField,
     SelectField,
-    SelectMultipleField,  # Adicione esta importação
+    SelectMultipleField,  # Corrigido
     SubmitField
 )
 from wtforms.validators import DataRequired, Email

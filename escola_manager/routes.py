@@ -7,26 +7,15 @@ from escola_manager.forms import SchoolForm, ClassForm, TeacherForm, StudentForm
 
 admin = Blueprint('admin', __name__)
 
-# ======================= Rotas Gerais =======================
-
-
-@admin.route('/')
-def home():
-    return redirect(url_for('auth.login'))
-
-# ======================= Rotas de Admin =======================
-
 
 @admin.route('/admin/dashboard')
 @login_required
 def admin_dashboard():
     if current_user.role != 'admin':
         abort(403)
-
     schools = School.query.count()
     teachers = Teacher.query.count()
     students = Student.query.count()
-
     return render_template('admin/dashboard.html',
                            schools=schools,
                            teachers=teachers,

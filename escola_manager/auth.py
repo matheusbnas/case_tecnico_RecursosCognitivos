@@ -1,3 +1,4 @@
+# escola_manager/auth.py
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
 from escola_manager.models import User

@@ -3,11 +3,8 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from dotenv import load_dotenv
 
-# Carrega as variáveis de ambiente
-load_dotenv()
-
+# Inicialize as extensões fora da função create_app
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
@@ -18,11 +15,13 @@ def create_app():
     app = Flask(__name__, template_folder='templates')
     app.config.from_object(Config)
 
+    # Configure as extensões com o app
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
-    login.login_view = 'auth.login'
+    login.login_view = 'auth.login'  # Endpoint da rota de login
 
+    # Carregar o user_loader dentro do contexto do app
     from .models import User
 
     @login.user_loader

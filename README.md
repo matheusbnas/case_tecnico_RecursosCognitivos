@@ -45,13 +45,13 @@ Antes de iniciar, certifique-se de ter instalado:
 
 3. Crie um ambiente virtual:
    ```bash
-   python3 -m venv venv
+   python -m venv venv
    ```
 
 4. Ative o ambiente virtual:
    - No Windows:
      ```bash
-     venv\Scripts\activate
+     .venv\Scripts\activate
      ```
    - No macOS/Linux:
      ```bash
@@ -107,5 +107,5 @@ Se desejar contribuir com este projeto, siga os passos abaixo:
 
 ## Licença
 
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo `LICENSE` para mais informações.
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo `[LICENSE](https://opensource.org/license/mit)` para mais informações.
 

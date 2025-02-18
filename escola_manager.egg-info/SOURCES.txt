@@ -1,0 +1,12 @@
+README.md
+setup.py
+escola_manager/__init__.py
+escola_manager/auth.py
+escola_manager/forms.py
+escola_manager/models.py
+escola_manager/routes.py
+escola_manager.egg-info/PKG-INFO
+escola_manager.egg-info/SOURCES.txt
+escola_manager.egg-info/dependency_links.txt
+escola_manager.egg-info/requires.txt
+escola_manager.egg-info/top_level.txt

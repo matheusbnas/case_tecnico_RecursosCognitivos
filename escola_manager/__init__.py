@@ -11,8 +11,7 @@ login = LoginManager()
 
 
 def create_app():
-    # Especifica a pasta de templates
-    app = Flask(__name__, template_folder='templates')
+    app = Flask(__name__)
     app.config.from_object(Config)
 
     # Configure as extensões com o app

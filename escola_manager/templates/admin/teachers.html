@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Professores</h2>
+    <a href="{{ url_for('admin.new_teacher') }}" class="btn btn-success mb-3">Novo Professor</a>
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Email</th>
+                            <th>Escola</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for teacher in teachers %}
+                        <tr>
+                            <td>{{ teacher.name }}</td>
+                            <td>{{ teacher.cpf }}</td>
+                            <td>{{ teacher.email }}</td>
+                            <td>{{ teacher.school.name }}</td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-primary">Editar</a>
+                                <button class="btn btn-sm btn-danger">Excluir</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
